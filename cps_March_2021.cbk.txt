@@ -1,0 +1,306 @@
+Samples selected:
+      IPUMS-CPS, March 2021
+            Note: 
+            Density of the full data file:  0.01%
+            Density of your extract: 0.0%
+
+File Type:                    rectangular
+Case Selection:               No
+  Variable               Columns        Len   03/2021 
+  REGION             H   1-2            2     X       
+  METRO              H   3              1     X       
+  AGE                P   4-5            2     X       
+  SEX                P   6              1     X       
+  RACE               P   7-9            3     X       
+  MARST              P  10              1     X       
+  POPSTAT            P  11              1     X       
+  FAMSIZE            P  12-13           2     X       
+  NCHLT5             P  14              1     X       
+  LABFORCE           P  15              1     X       
+  EDUC               P  16-18           3     X       
+  DIFFANY            P  19              1     X       
+  WKSWORK1           P  20-21           2     X       
+  UHRSWORKLY         P  22-24           3     X       
+  FTOTVAL            P  25-34          10     X       
+  INCWAGE            P  35-42           8     X       
+
+Variable Availability Key:
+All Years X - available in this sample
+All Years . - not available in this sample
+
+RECTYPE   Record type
+H         Household
+P         Person
+
+REGION              Region and division
+                    NORTHEAST REGION
+11                  New England Division
+12                  Middle Atlantic Division
+                    MIDWEST REGION
+21                  East North Central Division
+22                  West North Central Division
+                    SOUTH REGION
+31                  South Atlantic Division
+32                  East South Central Division
+33                  West South Central Division
+                    WEST REGION
+41                  Mountain Division
+42                  Pacific Division
+                    STATE UNKNOWN
+97                  State not identified
+
+METRO               Metropolitan central city status
+0                   Not identifiable
+1                   Not in metro area
+                    In metro area
+2                   Central city
+3                   Outside central city
+4                   Central city status unknown
+9                   Missing/Unknown
+
+AGE                 Age
+00                  Under 1 year
+01                  1
+02                  2
+03                  3
+04                  4
+05                  5
+06                  6
+07                  7
+08                  8
+09                  9
+10                  10
+11                  11
+12                  12
+13                  13
+14                  14
+15                  15
+16                  16
+17                  17
+18                  18
+19                  19
+20                  20
+21                  21
+22                  22
+23                  23
+24                  24
+25                  25
+26                  26
+27                  27
+28                  28
+29                  29
+30                  30
+31                  31
+32                  32
+33                  33
+34                  34
+35                  35
+36                  36
+37                  37
+38                  38
+39                  39
+40                  40
+41                  41
+42                  42
+43                  43
+44                  44
+45                  45
+46                  46
+47                  47
+48                  48
+49                  49
+50                  50
+51                  51
+52                  52
+53                  53
+54                  54
+55                  55
+56                  56
+57                  57
+58                  58
+59                  59
+60                  60
+61                  61
+62                  62
+63                  63
+64                  64
+65                  65
+66                  66
+67                  67
+68                  68
+69                  69
+70                  70
+71                  71
+72                  72
+73                  73
+74                  74
+75                  75
+76                  76
+77                  77
+78                  78
+79                  79
+80                  80
+81                  81
+82                  82
+83                  83
+84                  84
+85                  85
+86                  86
+87                  87
+88                  88
+89                  89
+90                  90 (90+, 1988-2002)
+91                  91
+92                  92
+93                  93
+94                  94
+95                  95
+96                  96
+97                  97
+98                  98
+99                  99+
+
+SEX                 Sex
+1                   Male
+2                   Female
+9                   NIU
+
+RACE                Race
+100                 White
+200                 Black
+300                 American Indian/Aleut/Eskimo
+650                 Asian or Pacific Islander
+651                 Asian only
+652                 Hawaiian/Pacific Islander only
+700                 Other (single) race, n.e.c.
+                    Two or more races
+801                 White-Black
+802                 White-American Indian
+803                 White-Asian
+804                 White-Hawaiian/Pacific Islander
+805                 Black-American Indian
+806                 Black-Asian
+807                 Black-Hawaiian/Pacific Islander
+808                 American Indian-Asian
+809                 Asian-Hawaiian/Pacific Islander
+810                 White-Black-American Indian
+811                 White-Black-Asian
+812                 White-American Indian-Asian
+813                 White-Asian-Hawaiian/Pacific Islander
+814                 White-Black-American Indian-Asian
+815                 American Indian-Hawaiian/Pacific Islander
+816                 White-Black--Hawaiian/Pacific Islander
+817                 White-American Indian-Hawaiian/Pacific Islander
+818                 Black-American Indian-Asian
+819                 White-American Indian-Asian-Hawaiian/Pacific Islander
+820                 Two or three races, unspecified
+830                 Four or five races, unspecified
+999                 Blank
+
+MARST               Marital status
+1                   Married, spouse present
+2                   Married, spouse absent
+3                   Separated
+4                   Divorced
+5                   Widowed
+6                   Never married/single
+7                   Widowed or Divorced
+9                   NIU
+
+POPSTAT             Adult civilian, armed forces, or child
+1                   Adult civilian
+2                   Armed Forces
+3                   Child
+
+FAMSIZE             Number of own family members in hh
+00                  Missing
+01                  1 family member present
+02                  2 family members present
+03                  3 family members present
+04                  4 family members present
+05                  5 family members present
+06                  6 family members present
+07                  7 family members present
+08                  8 family members present
+09                  9 family members present
+10                  10 family members present
+11                  11 family members present
+12                  12 family members present
+13                  13 family members present
+14                  14 family members present
+15                  15 family members present
+16                  16 family members present
+17                  17 family members present
+18                  18 family members present
+19                  19 family members present
+20                  20 family members present
+21                  21 family members present
+22                  22 family members present
+23                  23 family members present
+24                  24 family members present
+25                  25 family members present
+26                  26 family members present
+27                  27 family members present
+28                  28 family members present
+29                  29 family members present
+
+NCHLT5              Number of own children under age 5 in hh
+0                   No children under age 5
+1                   1 child under age 5
+2                   2
+3                   3
+4                   4
+5                   5
+6                   6
+7                   7
+8                   8
+9                   9+
+
+LABFORCE            Labor force status
+0                   NIU
+1                   No, not in the labor force
+2                   Yes, in the labor force
+
+EDUC                Educational attainment recode
+000                 NIU or no schooling
+001                 NIU or blank
+002                 None or preschool
+010                 Grades 1, 2, 3, or 4
+011                 Grade 1
+012                 Grade 2
+013                 Grade 3
+014                 Grade 4
+020                 Grades 5 or 6
+021                 Grade 5
+022                 Grade 6
+030                 Grades 7 or 8
+031                 Grade 7
+032                 Grade 8
+040                 Grade 9
+050                 Grade 10
+060                 Grade 11
+070                 Grade 12
+071                 12th grade, no diploma
+072                 12th grade, diploma unclear
+073                 High school diploma or equivalent
+080                 1 year of college
+081                 Some college but no degree
+090                 2 years of college
+091                 Associate's degree, occupational/vocational program
+092                 Associate's degree, academic program
+100                 3 years of college
+110                 4 years of college
+111                 Bachelor's degree
+120                 5+ years of college
+121                 5 years of college
+122                 6+ years of college
+123                 Master's degree
+124                 Professional school degree
+125                 Doctorate degree
+999                 Missing/Unknown
+
+DIFFANY             Any difficulty
+0                   NIU
+1                   No difficulty
+2                   Has difficulty
+
