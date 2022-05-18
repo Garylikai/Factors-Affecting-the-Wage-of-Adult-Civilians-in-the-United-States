@@ -1,0 +1,108 @@
+---
+title: "ECO 521 Project"
+author: "Kai Li"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r, message = FALSE, warning = FALSE}
+#library(vtable)
+library(ggplot2)
+library(sampleSelection)
+```
+
+```{r}
+data <- read.csv("cps_March_2021.csv", header = TRUE)
+data <- data[(data$REGION != 97) & !(data$METRO %in% c(0, 4, 9)) & (data$SEX != 9) & 
+             (data$RACE != 999) & !(data$MARST %in% c(7, 9)) & (data$POPSTAT == 1) & 
+             (data$FAMSIZE != 0) & (data$LABFORCE != 0) & (data$UHRSWORKLY != 999) & 
+             !(data$EDUC %in% c(0, 1, 999)) & (data$DIFFANY != 0) & 
+             (data$FTOTVAL != 9999999999) & !(data$INCWAGE %in% c(99999998, 99999999)),]
+sum(is.na(data))
+```
+
+```{r}
+data$NORTHEAST <- ifelse(data$REGION %in% c(11, 12), 1, 0)
+data$MIDWEST <- ifelse(data$REGION %in% c(21, 22), 1, 0)
+data$SOUTH <- ifelse(data$REGION %in% c(31, 32, 33), 1, 0)
+data$WEST <- ifelse(data$REGION %in% c(41, 42), 1, 0)
+
+data$METRO <- ifelse(data$METRO == 1, 0, 1)
+
+data <- data[(data$AGE > 15) & (data$AGE < 65),]
+
+data$MALE <- ifelse(data$SEX == 1, 1, 0)
+
+data$WHITE <- ifelse(data$RACE == 100, 1, 0)
+
+data$MARRIED <- ifelse(data$MARST %in% c(1, 2), 1, 0)
+
+data$CHLT5 <- ifelse(data$NCHLT5 != 0, 1, 0)
+
+data$LABFORCE <- ifelse(data$LABFORCE == 1, 0, 1)
+
+data$LESS_THAN_HIGH <- ifelse(data$EDUC %in% c(2, 10, 20, 30, 40, 50, 60, 71), 1, 0)
+data$HIGH <- ifelse(data$EDUC == 73, 1, 0)
+data$SOME_COLLEGE <- ifelse(data$EDUC == 81, 1, 0)
+data$COLLEGE <- ifelse(data$EDUC %in% c(91, 92, 111), 1, 0)
+data$GREATER_THAN_COLLEGE <- ifelse(data$EDUC %in% c(123, 124, 125), 1, 0)
+
+data$DIFFANY <- ifelse(data$DIFFANY == 1, 0, 1)
+
+low_FTOTVAL <- quantile(data$FTOTVAL, probs=c(0.25, 0.75))[1]-IQR(data$FTOTVAL)
+up_FTOTVAL <- quantile(data$FTOTVAL, probs=c(0.25, 0.75))[2]+IQR(data$FTOTVAL)
+data <- data[(data$FTOTVAL > low_FTOTVAL) & (data$FTOTVAL < up_FTOTVAL),]
+
+data$WAGE <- data$INCWAGE/data$WKSWORK1/data$UHRSWORKLY
+low_WAGE <- quantile(data$WAGE, probs=c(0.25, 0.75))[1]-IQR(data$WAGE)
+up_WAGE <- quantile(data$WAGE, probs=c(0.25, 0.75))[2]+IQR(data$WAGE)
+data <- data[(data$WAGE > max(c(low_WAGE, 7.25))) & (data$WAGE < up_WAGE),]
+
+data <- data[, !(names(data) %in% c("REGION", "SEX", "RACE", "MARST", "POPSTAT", "NCHLT5",
+                                    "EDUC", "WKSWORK1", "UHRSWORKLY", "INCWAGE"))]
+```
+
+```{r}
+str(data)
+```
+
+```{r}
+summary(data)
+```
+
+```{r, echo = FALSE}
+# sumtable(data, vars = , c("NORTHEAST", "MIDWEST", "SOUTH", "WEST", "METRO", "AGE", "MALE", "WHITE", "MARRIED", "FAMSIZE", "CHLT5", "LABFORCE", "LESS_THAN_HIGH", "HIGH", "SOME_COLLEGE", "COLLEGE", "GREATER_THAN_COLLEGE", "DIFFANY", "FTOTVAL", "WAGE"), out = "viewer", summ = c("notNA(x)", "mean(x)", "sd(x)", "min(x)", "max(x)"))
+```
+
+```{r}
+cols <- c("NORTHEAST", "MIDWEST", "SOUTH", "WEST", "METRO", "MALE", "WHITE", "MARRIED",
+          "CHLT5", "LABFORCE", "LESS_THAN_HIGH", "HIGH", "SOME_COLLEGE", "COLLEGE",
+          "GREATER_THAN_COLLEGE", "DIFFANY")
+data[cols] <- lapply(data[cols], factor)
+```
+
+
+```{r}
+ggplot(data, aes(x = WAGE)) + 
+  geom_histogram(aes(y = ..density..), color = "darkblue", fill = "lightblue",
+                 binwidth = 2*IQR(data$WAGE)/length(data$WAGE)^(1/3)) +
+  geom_density(alpha = 0.2, fill = "#FF6666") + xlab("Wage") + ylab("Density")
+```
+
+```{r}
+ggplot(data, aes(x = log(WAGE))) + 
+  geom_histogram(aes(y = ..density..), color = "darkblue", fill = "lightblue",
+                 binwidth = 2*IQR(log(data$WAGE))/length(data$WAGE)^(1/3)) +
+  geom_density(alpha = 0.2, fill = "#FF6666") + xlab("ln(Wage)") + ylab("Density")
+```
+
+
+```{r}
+model <- selection(LABFORCE ~ I((AGE-mean(AGE))/100) + I(((AGE-mean(AGE))^2)/100) + MALE
+                   + WHITE + MARRIED + FAMSIZE + CHLT5 + LESS_THAN_HIGH + HIGH + SOME_COLLEGE
+                   + COLLEGE + DIFFANY + I(FTOTVAL/100000) + MALE:MARRIED,
+                   log(WAGE) ~ NORTHEAST + SOUTH + MIDWEST + METRO + I((AGE-mean(AGE))/100) 
+                   + I(((AGE-mean(AGE))^2)/100) + MALE + WHITE + LESS_THAN_HIGH + HIGH
+                   + SOME_COLLEGE + COLLEGE + MALE:WHITE, data = data, method = "2step")
+summary(model)
+```
